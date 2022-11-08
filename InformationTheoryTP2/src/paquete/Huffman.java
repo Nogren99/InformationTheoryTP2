@@ -35,7 +35,7 @@ public class Huffman {
     public void creaArbolHuffman() {
 
         int n = Lectura.getInstance().getCantSimbolos();
-        Map <String, Register> codigo = Lectura.getInstance().getCodigo();
+        Map <String, Register> codigo = Lectura.getInstance().getDiccionario();
         ArrayList<String> indice = Lectura.getInstance().getIndice();
 
         PriorityQueue<Nodo> cola = new PriorityQueue<Nodo>(n, new compare());

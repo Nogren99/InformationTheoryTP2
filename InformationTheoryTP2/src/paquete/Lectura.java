@@ -1,12 +1,15 @@
 package paquete;
 
-import Exepciones.noSePudoLeerException;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
+import paquete.Register;
 public class Lectura {
 
     public int matriz[][] = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
@@ -14,7 +17,7 @@ public class Lectura {
     public Map <Character, Integer> alfabeto = new HashMap<Character, Integer>();
     public double vecProb[] = new double[27];
     public ArrayList<String> indice = new ArrayList<String>();
-    public Map <String, Register> codigo = new HashMap<String, Register>();
+    public Map <String, Register> diccionario = new HashMap<String, Register>();
     public Map <String, String> tablaHuffman = new HashMap<String, String>();
     public int cantSimbolos;
     //public int cantCaracteres;
@@ -41,8 +44,8 @@ public class Lectura {
         return alfabeto;
     }
 
-    public Map<String, Register> getCodigo() {
-        return codigo;
+    public Map<String, Register> getDiccionario() {
+        return diccionario;
     }
 
     public ArrayList<String> getIndice() {
@@ -59,15 +62,15 @@ public class Lectura {
         return instance;
     }
 
-    public void setCodigo(Map<String, Register> codigo) {
-        this.codigo = codigo;
+    public void setDiccionario(Map<String, Register> diccionario) {
+        this.diccionario = diccionario;
     }
 
-    public void cargaAlfabeto(){
-        this.alfabeto.put('A',0); //agregar a medida que se lee
-        this.alfabeto.put('B',1);
-        this.alfabeto.put('C',2);
-    }
+//    public void cargaAlfabeto(){
+//        this.alfabeto.put('A',0); //agregar a medida que se lee
+//        this.alfabeto.put('B',1);
+//        this.alfabeto.put('C',2);
+//    }
 
 //    public void leeArch() throws noSePudoLeerException {
 //        FileReader fr;
@@ -123,87 +126,104 @@ public class Lectura {
     }
 
 
-    public void calculaProb() throws noSePudoLeerException {
-        FileReader fr;
-        char c;
-        int i=0;
-        try {
-            fr = new FileReader("src/assets/datos.txt");
-            //fr = new FileReader("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
-            while(i<9999) {
-                c = (char) fr.read();
-                this.vecProb[alfabeto.get(c)]++;
-                i++;
-            }
-            for (i=0;i<alfabeto.size();i++){
-                this.vecProb[i]/= 10000;
-                System.out.println(i+" --> " + this.vecProb[i]);
-            }
-        } catch (Exception ex) {
-            throw new noSePudoLeerException("Error al leer");
-        }
-    }
+//    public void calculaProb() throws noSePudoLeerException {
+//        FileReader fr;
+//        char c;
+//        int i=0;
+//        try {
+//            fr = new FileReader("src/assets/datos.txt");
+//            //fr = new FileReader("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
+//            while(i<9999) {
+//                c = (char) fr.read();
+//                this.vecProb[alfabeto.get(c)]++;
+//                i++;
+//            }
+//            for (i=0;i<alfabeto.size();i++){
+//                this.vecProb[i]/= 10000;
+//                System.out.println(i+" --> " + this.vecProb[i]);
+//            }
+//        } catch (Exception ex) {
+//            throw new noSePudoLeerException("Error al leer");
+//        }
+//    }
 
     public void leeArch () throws IOException {
 
-        File doc = new File("src/assets/datos.txt");
+        File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
         //File doc = new File("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
         String mensaje="", str,simbolo;
         int frec = 0;
         int j=0;
         Register actual;
         this.indice.clear();
-        this.codigo.clear();
+        this.diccionario.clear();
 
         char c = (char) -1;
+        String vacio = "";
         StringBuilder sb = new StringBuilder();
+        Scanner lector = new Scanner(doc);
 
 //            BufferedReader obj = new BufferedReader(new FileReader(doc));
 //            str = obj.readLine();
 
-            FileReader fr = null;
-            try {
-                fr = new FileReader("src/assets/datos.txt");
-
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
+        while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
+            simbolo = lector.next();
+            //System.out.println(simbolo);
+            if(!diccionario.containsKey(simbolo)){
+                indice.add(simbolo);
+                diccionario.put(simbolo, new Register(simbolo, 1));
             }
-
-            try {
-                 c = (char) fr.read();
-                //System.out.println(c);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+            else {
+                actual= diccionario.get(simbolo);
+                actual.setFrec(actual.getFrec()+1);
             }
+        }
+        this.cantSimbolos = this.indice.size();
+//            FileReader fr = null;
+//            try {
+//                fr = new FileReader("InformationTheoryTP2/src/assets/datos.txt");
+//                //fr = new FileReader("src/assets/datos.txt");
+//
+//            } catch (FileNotFoundException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//
+//            try {
+//                 c = (char) fr.read();
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            }
 
-            while (c != (char) -1) {
-
-                sb.setLength(0);
-                while(Character.isLetterOrDigit(c)){
-               //while( (c <= 'Z' && c >= 'A') || (c <= 'Ñ' && c >= 'á') || (c <= 'z' && c >= 'a') || (c <= '9' && c >= '0')){
-                    sb.append(c);
-                    c = (char) fr.read();
-                }
-                simbolo = sb.toString();
-                System.out.println(simbolo);
-                if(sb.length() > 0){
-                    if(!codigo.containsKey(simbolo)){
-                        indice.add(simbolo);
-                        codigo.put(simbolo, new Register(simbolo, 1));
-                    }
-                    else {
-                        actual=codigo.get(simbolo);
-                        actual.setFrec(actual.getFrec()+1);
-                    }
-                }
-                c = (char) fr.read();
+//            while (c != (char) -1) {
+//
+//                sb.setLength(0);
+//                while(Character.isLetterOrDigit(c) || Character.isAlphabetic(c)){
+//               //while( (c <= 'Z' && c >= 'A') || (c <= 'Ñ' && c >= 'á') || (c <= 'z' && c >= 'a') || (c <= '9' && c >= '0')){
+//                    sb.append(c);
+//                    c = (char) fr.read();
+//                }
+//
+//                //System.out.println(c+"->"+Character.isLetterOrDigit(c));
+//                simbolo = sb.toString();
+//                //System.out.println(simbolo);
+//                if(sb.length() > 0){
+//                    if(!diccionario.containsKey(simbolo)){
+//                        indice.add(simbolo);
+//                        diccionario.put(simbolo, new Register(simbolo, 1));
+//                    }
+//                    else {
+//                        actual= diccionario.get(simbolo);
+//                        actual.setFrec(actual.getFrec()+1);
+//                    }
+//                }
+                //c = (char) fr.read();
                 simbolo = "";
             }
 
             //System.out.println(codigo.toString());
 
      //this.cantSimbolos = this.indice.size();
-    }
+    //}
     public double[] getVecProb() {
         return vecProb;
     }
