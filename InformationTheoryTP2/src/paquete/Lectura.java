@@ -17,15 +17,15 @@ public class Lectura {
     public Map <String, Register> codigo = new HashMap<String, Register>();
     public Map <String, String> tablaHuffman = new HashMap<String, String>();
     public int cantSimbolos;
-    public int cantCaracteres;
+    //public int cantCaracteres;
 
     public void setCantSimbolos(int cantSimbolos) {
         this.cantSimbolos = cantSimbolos;
     }
 
-    public int getCantCaracteres() {
-        return cantCaracteres;
-    }
+//    public int getCantCaracteres() {
+//        return cantCaracteres;
+//    }
 
     public Lectura() {
     }
@@ -69,29 +69,29 @@ public class Lectura {
         this.alfabeto.put('C',2);
     }
 
-    public void leeArch() throws noSePudoLeerException {
-        FileReader fr;
-        char c1,c2;
-        int i=0, j=-1;
-
-        try {
-            fr = new FileReader("src/assets/datos.txt");
-            //fr = new FileReader("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
-            c1 = (char) fr.read();
-            c2 = (char) fr.read();
-
-            while(i<9999) {
-                matriz[alfabeto.get(c2)][alfabeto.get(c1)]++;
-                c1=c2;
-                c2 = (char) fr.read();
-                i++;
-            }
-            System.out.println("Size:" +alfabeto.size());
-            System.out.println(alfabeto);
-        } catch (Exception ex) {
-            throw new noSePudoLeerException("Error al leer");
-        }
-    }
+//    public void leeArch() throws noSePudoLeerException {
+//        FileReader fr;
+//        char c1,c2;
+//        int i=0, j=-1;
+//
+//        try {
+//            fr = new FileReader("src/assets/datos.txt");
+//            //fr = new FileReader("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
+//            c1 = (char) fr.read();
+//            c2 = (char) fr.read();
+//
+//            while(i<9999) {
+//                matriz[alfabeto.get(c2)][alfabeto.get(c1)]++;
+//                c1=c2;
+//                c2 = (char) fr.read();
+//                i++;
+//            }
+//            System.out.println("Size:" +alfabeto.size());
+//            System.out.println(alfabeto);
+//        } catch (Exception ex) {
+//            throw new noSePudoLeerException("Error al leer");
+//        }
+//    }
 
 
     public void muestraMatriz(int matriz [][]){
@@ -144,7 +144,7 @@ public class Lectura {
         }
     }
 
-    public void separaTexto (int n){
+    public void leeArch () throws IOException {
 
         File doc = new File("src/assets/datos.txt");
         //File doc = new File("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
@@ -154,39 +154,55 @@ public class Lectura {
         Register actual;
         this.indice.clear();
         this.codigo.clear();
-        this.cantCaracteres = n;
-        try {
-            BufferedReader obj = new BufferedReader(new FileReader(doc));
-            while ((str = obj.readLine()) != null)
-                mensaje += str;
 
-            while (j<10000) {
-                if (n==3 && j==9999) {
-                    simbolo = mensaje.substring(j);
-                }
-                else if (n==7 && j==9996)
-                    simbolo = mensaje.substring(j, j+4);
-                else
-                    simbolo = mensaje.substring(j, j + n);
-                if(!codigo.containsKey(simbolo)){
-                    indice.add(simbolo);
-                    codigo.put(simbolo, new Register(simbolo, 1));
-                }
-                else {
-                    actual=codigo.get(simbolo);
-                    actual.setFrec(actual.getFrec()+1);
-                }
-                j += n;
+        char c = (char) -1;
+        StringBuilder sb = new StringBuilder();
+
+//            BufferedReader obj = new BufferedReader(new FileReader(doc));
+//            str = obj.readLine();
+
+            FileReader fr = null;
+            try {
+                fr = new FileReader("src/assets/datos.txt");
+
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
             }
-            System.out.println(codigo.toString());
-        }
 
-        catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        this.cantSimbolos = this.indice.size();
+            try {
+                 c = (char) fr.read();
+                //System.out.println(c);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            while (c != (char) -1) {
+
+                sb.setLength(0);
+                while(Character.isLetterOrDigit(c)){
+               //while( (c <= 'Z' && c >= 'A') || (c <= 'Ñ' && c >= 'á') || (c <= 'z' && c >= 'a') || (c <= '9' && c >= '0')){
+                    sb.append(c);
+                    c = (char) fr.read();
+                }
+                simbolo = sb.toString();
+                System.out.println(simbolo);
+                if(sb.length() > 0){
+                    if(!codigo.containsKey(simbolo)){
+                        indice.add(simbolo);
+                        codigo.put(simbolo, new Register(simbolo, 1));
+                    }
+                    else {
+                        actual=codigo.get(simbolo);
+                        actual.setFrec(actual.getFrec()+1);
+                    }
+                }
+                c = (char) fr.read();
+                simbolo = "";
+            }
+
+            //System.out.println(codigo.toString());
+
+     //this.cantSimbolos = this.indice.size();
     }
     public double[] getVecProb() {
         return vecProb;
