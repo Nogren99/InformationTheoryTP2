@@ -10,10 +10,19 @@ public class Register implements Comparable{
     public Register(String simbolo, int frec) {
         this.simbolo = simbolo;
         this.frec = frec;
+        this.codigo = "";
     }
 
     public String getSimbolo() {
         return simbolo;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public void setMensaje(String mensaje) {

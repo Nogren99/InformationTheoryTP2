@@ -76,7 +76,7 @@ public class EscribeArchivos {
 
         while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
-            //System.out.println(simbolo);
+            //System.out.println(simbolo+": "+Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
             printWriter.print(Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
         }
             System.out.println("archivo creado");
