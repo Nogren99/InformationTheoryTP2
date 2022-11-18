@@ -58,7 +58,7 @@ public class EscribeArchivos {
         FileReader fileReader=null;
         PrintWriter printWriter = null;
 
-        File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
+        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
         Scanner lector = null;
         try {
             lector = new Scanner(doc);
@@ -68,7 +68,7 @@ public class EscribeArchivos {
         String simbolo = "";
 
         try {
-            FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
+            FileWriter archivoSalida= new FileWriter("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
             printWriter= new PrintWriter(archivoSalida);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -80,6 +80,10 @@ public class EscribeArchivos {
             printWriter.print(Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
         }
             System.out.println("archivo creado");
+        }
+
+        public static void escrbir(String fichero, int []datos){
+
         }
 
 }
