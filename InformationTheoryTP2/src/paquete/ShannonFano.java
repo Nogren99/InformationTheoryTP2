@@ -34,13 +34,13 @@ public class ShannonFano {
 				//String codigo = caracteres.get(i).getCodigo();
 				//caracteres.get(i).setCodigo(codigo+"0");
 				String codigo = diccionario.get(indice.get(i)).getCodigo();
-				diccionario.get(indice.get(i)).setCodigo(codigo+"0");
+				diccionario.get(indice.get(i)).setCodigo(codigo+"1");
 			}
 			for(int i=y;i<=fin;i++){
 				//String codigo = caracteres.get(i).getCodigo();
 				//caracteres.get(i).setCodigo(codigo+"1");
 				String codigo = diccionario.get(indice.get(i)).getCodigo();
-				diccionario.get(indice.get(i)).setCodigo(codigo+"1");
+				diccionario.get(indice.get(i)).setCodigo(codigo+"0");
 			}
 			//Llama recursivamente con el conjunto izquierdo y con el derecho
 			codificar(inicio,y-1);

@@ -54,7 +54,7 @@ public class EscribeArchivos {
         }
     }
 
-    public void creaArch() {
+    public void creaArchHuffman() {
         FileReader fileReader=null;
         PrintWriter printWriter = null;
 
@@ -81,5 +81,33 @@ public class EscribeArchivos {
         }
             System.out.println("archivo creado");
         }
+
+    public void creaArchShannon() {
+        FileReader fileReader=null;
+        PrintWriter printWriter = null;
+
+        File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
+        Scanner lector = null;
+        try {
+            lector = new Scanner(doc);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String simbolo = "";
+
+        try {
+            FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/shannon.txt");
+            printWriter= new PrintWriter(archivoSalida);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
+            simbolo = lector.next();
+            //System.out.println(simbolo+": "+Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
+            printWriter.print(Lectura.getInstance().getTablaShannon().get(simbolo)+"\n");
+        }
+        System.out.println("archivo creado");
+    }
 
 }

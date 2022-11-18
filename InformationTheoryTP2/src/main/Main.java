@@ -1,9 +1,6 @@
 package main;
 
-import paquete.EscribeArchivos;
-import paquete.Huffman;
-import paquete.Lectura;
-import paquete.ShannonFano;
+import paquete.*;
 
 import java.io.IOException;
 import java.sql.SQLOutput;
@@ -22,12 +19,13 @@ public class Main {
         ShannonFano.creaTablaShannon();
         System.out.println("Tabla Shannon");
         System.out.println(Lectura.getInstance().getTablaShannon());
+        EscribeArchivos.getInstance().creaArchShannon();
        // huffman.creaArbolHuffman();
 //        System.out.println("Tabla UFFFF");
 //        System.out.println(Lectura.getInstance().getTablaHuffman());
 
         //System.out.println(Lectura.getInstance().getTablaHuffman());
-        //EscribeArchivos.getInstance().creaArch();
+        //EscribeArchivos.getInstance().creaArchHuffman();
         Lectura.getInstance().getTablaHuffman().clear();
         //System.out.println(Lectura.getInstance().getDiccionario());
     }

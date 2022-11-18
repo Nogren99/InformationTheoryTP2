@@ -20,7 +20,7 @@ class compare implements Comparator<Nodo> {
 
 public class Huffman {
 
-    public void cargaTabla(Nodo raiz, String s) {
+    public static void cargaTabla(Nodo raiz, String s) {
 
         if (raiz.izq == null && raiz.der == null ) {
             Lectura.getInstance().getTablaHuffman().put(raiz.simbolo,s);
@@ -32,7 +32,7 @@ public class Huffman {
         cargaTabla(raiz.der, s + "1");
     }
 
-    public void creaArbolHuffman() {
+    public static void creaArbolHuffman() {
 
         int n = Lectura.getInstance().getCantSimbolos();
         Map <String, Register> codigo = Lectura.getInstance().getDiccionario();
