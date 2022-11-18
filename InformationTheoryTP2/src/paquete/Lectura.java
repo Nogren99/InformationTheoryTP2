@@ -158,7 +158,7 @@ public class Lectura {
 
     public void leeArch () throws IOException {
 
-        File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
+        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
         //File doc = new File("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
         String mensaje="", str,simbolo;
         int frec = 0;
