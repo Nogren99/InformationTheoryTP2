@@ -19,6 +19,7 @@ public class Lectura {
     public ArrayList<String> indice = new ArrayList<String>();
     public Map <String, Register> diccionario = new HashMap<String, Register>();
     public Map <String, String> tablaHuffman = new HashMap<String, String>();
+    public Map <String, String> tablaShannon = new HashMap<String, String>();
     public int cantSimbolos;
     //public int cantCaracteres;
 
@@ -54,6 +55,14 @@ public class Lectura {
 
     public Map<String, String> getTablaHuffman() {
         return tablaHuffman;
+    }
+
+    public Map<String, String> getTablaShannon() {
+        return tablaShannon;
+    }
+
+    public void setTablaShannon(Map<String, String> tablaShannon) {
+        this.tablaShannon = tablaShannon;
     }
 
     public static Lectura getInstance() {
@@ -168,7 +177,7 @@ public class Lectura {
 
         while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
-            //System.out.println(simbolo);
+           // System.out.println(simbolo);
             if(!diccionario.containsKey(simbolo)){
                 indice.add(simbolo);
                 diccionario.put(simbolo, new Register(simbolo, 1));
