@@ -65,8 +65,8 @@ public class EscribeArchivos {
         ArrayList<String> indice = Lectura.getInstance().getIndice();
 
         //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
-        //File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
-        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
+        //File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         Scanner lector = null;
         try {
@@ -78,8 +78,8 @@ public class EscribeArchivos {
 
         try {
             //FileWriter archivoSalida= new FileWriter("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
-            //FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
-            FileWriter archivoSalida= new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
+            FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
+            //FileWriter archivoSalida= new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
             printWriter= new PrintWriter(archivoSalida);
         } catch (IOException e) {
             throw new RuntimeException(e);
