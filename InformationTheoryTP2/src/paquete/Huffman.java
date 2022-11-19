@@ -32,7 +32,7 @@ public class Huffman {
         cargaTabla(raiz.der, s + "1");
     }
 
-    public static void creaArbolHuffman() {
+    public static void codificaHuffman() {
 
         int n = Lectura.getInstance().getCantSimbolos();
         Map <String, Register> codigo = Lectura.getInstance().getDiccionario();

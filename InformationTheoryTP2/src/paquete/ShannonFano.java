@@ -1,8 +1,5 @@
 package paquete;
 
-import paquete.Lectura;
-import paquete.Register;
-
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -11,7 +8,8 @@ public class ShannonFano {
 	public static ArrayList<String> indice = Lectura.getInstance().getIndice();
 	public static Map<String, Register> diccionario = Lectura.getInstance().getDiccionario();
 
-	public static void codificar(int inicio,int fin){
+	public static void codifica(int inicio, int fin){
+
 		if(inicio!=fin) {
 			int y=inicio;
 			int z=fin;
@@ -43,14 +41,15 @@ public class ShannonFano {
 				diccionario.get(indice.get(i)).setCodigo(codigo+"0");
 			}
 			//Llama recursivamente con el conjunto izquierdo y con el derecho
-			codificar(inicio,y-1);
-			codificar(y,fin);
+			codifica(inicio,y-1);
+			codifica(y,fin);
 		}
-
 	}
-	public static void creaTablaShannon(){
+
+	public static void codificaShannon(int inicio, int fin){
 		Map <String, String> tablaShannon = Lectura.getInstance().getTablaShannon();
 
+		codifica(inicio,fin);
 		for(int i=0;i<Lectura.getInstance().cantSimbolos;i++){
 
 			String simbolo = diccionario.get(indice.get(i)).getSimbolo();

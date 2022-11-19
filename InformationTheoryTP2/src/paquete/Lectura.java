@@ -1,9 +1,6 @@
 package paquete;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,10 +58,6 @@ public class Lectura {
         return tablaShannon;
     }
 
-    public void setTablaShannon(Map<String, String> tablaShannon) {
-        this.tablaShannon = tablaShannon;
-    }
-
     public static Lectura getInstance() {
         if (instance == null)
             instance = new Lectura();
@@ -104,7 +97,6 @@ public class Lectura {
 //            throw new noSePudoLeerException("Error al leer");
 //        }
 //    }
-
 
     public void muestraMatriz(int matriz [][]){
         char aux = 'A';
@@ -158,7 +150,10 @@ public class Lectura {
 
     public void leeArch () throws IOException {
 
-        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
+        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+
         //File doc = new File("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
         String mensaje="", str,simbolo;
         int frec = 0;
@@ -187,8 +182,9 @@ public class Lectura {
                 actual.setFrec(actual.getFrec()+1);
             }
         }
+
         this.cantSimbolos = this.indice.size();
-//            FileReader fr = null;
+        //       FileReader fr = null;
 //            try {
 //                fr = new FileReader("InformationTheoryTP2/src/assets/datos.txt");
 //                //fr = new FileReader("src/assets/datos.txt");
@@ -225,14 +221,9 @@ public class Lectura {
 //                        actual.setFrec(actual.getFrec()+1);
 //                    }
 //                }
-                //c = (char) fr.read();
-                simbolo = "";
-            }
+        //c = (char) fr.read();
+    }
 
-            //System.out.println(codigo.toString());
-
-     //this.cantSimbolos = this.indice.size();
-    //}
     public double[] getVecProb() {
         return vecProb;
     }
