@@ -1,6 +1,7 @@
 package paquete;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -58,17 +59,19 @@ public class bits {
         FileReader fr = null;
         char c;
         String codigo = "";
-        //Map<String, String> tabla = new HashMap<String, String>();
-        Map<String, String> tabla = Lectura.getInstance().getTablaCodificaHuffman();
+        Map<String, String> tabla = new HashMap<String, String>();  //CODIGO - SIMBOLO
+        //Map<String, String> tabla = Lectura.getInstance().getTablaCodificaHuffman();
         FileWriter fw = null;
+        this.ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
 
+        int i = 0, cantCaracteres = 0;
         try {
             fw = new FileWriter(new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\decodificacionHuffman.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 //        }
-        this.ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
+
         try {
             File docccc;
             //Stream para leer archivo
@@ -77,6 +80,18 @@ public class bits {
             docccc = (File) file.readObject();
             //se cierra archivo
             file.close();
+
+
+//            Scanner lector = null;
+//            lector = new Scanner(docccc);
+//            String simbolo="";
+//
+//            while(lector.hasNext() && i < cantCaracteres) {       // toma las palabras con los signos de puntuacion pegados.
+//                simbolo = lector.next();
+//                //tablaDecodifica.put()
+//                i++;
+//            }
+// CARGAR TABLA
 
             fr = new FileReader(docccc);
             c = (char) fr.read();
