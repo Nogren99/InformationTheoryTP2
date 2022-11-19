@@ -23,7 +23,7 @@ public class Huffman {
     public static void cargaTabla(Nodo raiz, String s) {
 
         if (raiz.izq == null && raiz.der == null ) {
-            Lectura.getInstance().getTablaHuffman().put(raiz.simbolo,s);
+            Lectura.getInstance().getTablaCodificaHuffman().put(raiz.simbolo,s);
             return;
         }
         //Cada vez que va a la izquierda agrega un 0 al codigo

@@ -1,6 +1,8 @@
 package paquete;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class EscribeArchivos {
@@ -57,6 +59,10 @@ public class EscribeArchivos {
     public void creaArchHuffman() {
         FileReader fileReader=null;
         PrintWriter printWriter = null;
+        int cantSimbolos = 0;
+
+        Map<String, String> tablaCodificaHuffman = Lectura.getInstance().getTablaCodificaHuffman();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
 
         //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
         //File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
@@ -78,11 +84,18 @@ public class EscribeArchivos {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        // ESCRIBE EL HEADER
+        cantSimbolos = Lectura.getInstance().getCantSimbolos();
+        printWriter.print(cantSimbolos+"\n");
+        for(int i=0; i < cantSimbolos; i++){
+            printWriter.print(indice.get(i)+" ");
+            printWriter.print(tablaCodificaHuffman.get(indice.get(i))+"\n");
+        }
 
         while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
             //System.out.println(simbolo+": "+Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
-            printWriter.print(Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
+            printWriter.print(Lectura.getInstance().getTablaCodificaHuffman().get(simbolo));
         }
             System.out.println("archivo creado");
         }
@@ -94,6 +107,11 @@ public class EscribeArchivos {
 
         File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
         Scanner lector = null;
+
+        Map <String, String> tablaCodificaShannon = Lectura.getInstance().getTablaCodificaShannon();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
+        int cantSimbolos = 0;
+
         try {
             lector = new Scanner(doc);
         } catch (FileNotFoundException e) {
@@ -108,10 +126,18 @@ public class EscribeArchivos {
             throw new RuntimeException(e);
         }
 
+        // ESCRIBE EL HEADER
+        cantSimbolos = Lectura.getInstance().getCantSimbolos();
+        printWriter.print(cantSimbolos+"\n");
+        for(int i=0; i < cantSimbolos; i++){
+            printWriter.print(indice.get(i)+" ");
+            printWriter.print(tablaCodificaShannon.get(indice.get(i))+"\n");
+        }
+
         while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
             //System.out.println(simbolo+": "+Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
-            printWriter.print(Lectura.getInstance().getTablaShannon().get(simbolo)+"\n");
+            printWriter.print(Lectura.getInstance().getTablaCodificaShannon().get(simbolo)+"\n");
         }
         System.out.println("archivo creado");
     }

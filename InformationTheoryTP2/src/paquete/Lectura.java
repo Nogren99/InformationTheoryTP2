@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import paquete.Register;
 public class Lectura {
 
     public int matriz[][] = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
@@ -15,8 +14,8 @@ public class Lectura {
     public double vecProb[] = new double[27];
     public ArrayList<String> indice = new ArrayList<String>();
     public Map <String, Register> diccionario = new HashMap<String, Register>();
-    public Map <String, String> tablaHuffman = new HashMap<String, String>();
-    public Map <String, String> tablaShannon = new HashMap<String, String>();
+    public Map <String, String> tablaCodificaHuffman = new HashMap<String, String>();
+    public Map <String, String> tablaCodificaShannon = new HashMap<String, String>();
     public int cantSimbolos;
     //public int cantCaracteres;
 
@@ -50,12 +49,12 @@ public class Lectura {
         return indice;
     }
 
-    public Map<String, String> getTablaHuffman() {
-        return tablaHuffman;
+    public Map<String, String> getTablaCodificaHuffman() {
+        return tablaCodificaHuffman;
     }
 
-    public Map<String, String> getTablaShannon() {
-        return tablaShannon;
+    public Map<String, String> getTablaCodificaShannon() {
+        return tablaCodificaShannon;
     }
 
     public static Lectura getInstance() {

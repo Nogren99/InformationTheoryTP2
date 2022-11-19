@@ -18,14 +18,15 @@ public class Main {
         }
 
         Huffman.codificaHuffman();
-        System.out.println(Lectura.getInstance().getTablaHuffman());
+        //System.out.println(Lectura.getInstance().getTablaHuffman());
         EscribeArchivos.getInstance().creaArchHuffman();
         //Lectura.getInstance().getTablaHuffman().clear();
 
         //System.out.println(Lectura.getInstance().getDiccionario());*/
-//        bits b = new bits();
-//        b.escribir();
-//        b.leer();
+        bits b = new bits();
+        b.escribir();
+        b.decodifica();
+        //b.leer();
 
 //        ShannonFano.codificaShannon(0,Lectura.getInstance().getCantSimbolos()-1);
 //        System.out.println("Tabla Shannon");

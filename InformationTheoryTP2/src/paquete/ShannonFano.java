@@ -47,7 +47,7 @@ public class ShannonFano {
 	}
 
 	public static void codificaShannon(int inicio, int fin){
-		Map <String, String> tablaShannon = Lectura.getInstance().getTablaShannon();
+		Map <String, String> tablaShannon = Lectura.getInstance().getTablaCodificaShannon();
 
 		codifica(inicio,fin);
 		for(int i=0;i<Lectura.getInstance().cantSimbolos;i++){
