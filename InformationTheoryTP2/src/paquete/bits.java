@@ -117,27 +117,63 @@ public class bits {
             }
 
 
-            fr = new FileReader(docccc);
-            c = (char) fr.read();
 
-            while (c != -1){
 
-                while(c != -1 && !tabla.containsKey(codigo)){
-                    //System.out.println(codigo+"\n");
-                    codigo = codigo+c;
-                    c = (char) fr.read();
+            /*
+
+            ----Prueba de charAt---
+
+
+            c=codigazo.charAt(0);
+            System.out.println("c:"+c);
+            c=codigazo.charAt(1);
+            System.out.println("c:"+c);
+            c=codigazo.charAt(2);
+            System.out.println("c:"+c);
+            c=codigazo.charAt(3);
+            System.out.println("c:"+c);
+            System.out.println("a ver el fina");
+            System.out.println(codigazo.charAt(codigazo.length()-11));
+            System.out.println(codigazo.charAt(codigazo.length()-10));
+            System.out.println(codigazo.charAt(codigazo.length()-9));
+            System.out.println(codigazo.charAt(codigazo.length()-8));
+            System.out.println(codigazo.charAt(codigazo.length()-7));
+            System.out.println(codigazo.charAt(codigazo.length()-6));
+            System.out.println(codigazo.charAt(codigazo.length()-5));
+            System.out.println(codigazo.charAt(codigazo.length()-4));
+            System.out.println(codigazo.charAt(codigazo.length()-3));
+            System.out.println(codigazo.charAt(codigazo.length()-2));
+            System.out.println("este es el ultimo caracter"+codigazo.charAt(codigazo.length()-1));
+            //System.out.println("sd"+codigazo.charAt(codigazo.length()));
+            */
+
+            String codigazo=lector.next();
+            int aux=codigazo.length()-1;
+            i=0;
+
+            while (i<aux){
+
+                String codigoActual="";
+                while(!tabla.containsKey(codigoActual) && i<aux){
+                    System.out.println("i:"+i+"c:"+codigazo.charAt(i));
+                    c=codigazo.charAt(i);
+                    codigoActual=codigoActual+c;
+                    i++;
+                    //System.out.println("asi va el codigo lol:"+codigoActual);
                 }
-                if(tabla.containsKey(codigo)){
-                    System.out.println(codigo+"\n");
-                    fw.write(tabla.get(codigo)+" ");
+                //System.out.println("[codigoactual FINwhile] "+codigoActual+"");
+                if(tabla.containsKey(codigoActual)){
+                    System.out.println("palabra encontrada -->"+tabla.get(codigoActual)+"\n");
+                    if(tabla.get(codigoActual).contains("."))
+                        printWriter.print(tabla.get(codigoActual)+ "\n");
+                    else
+                        printWriter.print(tabla.get(codigoActual)+ " ");
+
                 }
-                codigo = "";
-                c = (char) fr.read();
+
             }
 
-            fr.close();
             fw.close();
-            //Se utilizan metodos de la clase asi como variables guardados en el objeto
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (IOException ex) {

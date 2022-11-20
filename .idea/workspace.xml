@@ -3,17 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4f900b6a-1d85-49df-8109-04390429915d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/huffman.dat" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/huffman.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/huffman.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/huffman.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/EscribeArchivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/EscribeArchivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/Lectura.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/Lectura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/decodificacionHuffman.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/decodificacionHuffman.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/bits.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/bits.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/huffman.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/huffman.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/EscribeArchivos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/EscribeArchivos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Huffman.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Huffman.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Lectura.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Lectura.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/ShannonFano.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/ShannonFano.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/decodificacionHuffman.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/decodificacionHuffman.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/bits.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/bits.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,5 +55,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/InformationTheoryTP2/src/main/Main.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
