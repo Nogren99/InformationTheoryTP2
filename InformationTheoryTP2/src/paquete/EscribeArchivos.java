@@ -4,6 +4,7 @@ import javax.print.DocFlavor;
 import java.io.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -19,6 +20,169 @@ public class EscribeArchivos {
         if(instance == null)
             instance = new EscribeArchivos();
         return instance;
+    }
+
+    public static void descomprimir(String nombreComprimido, String nombreDescomprimido) throws IOException {
+
+        FileInputStream reader = new FileInputStream("salidas/" + nombreComprimido);
+        Map<String, String> tabla = leerTabla(reader);
+
+        FileOutputStream writer = new FileOutputStream("salidas/" + nombreDescomprimido);
+
+        byte b = 0;
+        int cantBits = 0;
+        String codigo = "";
+        while (reader.available() > 0) {
+            if (cantBits == 0) {
+                cantBits = 8;
+                b = reader.readNBytes(1)[0];
+            }
+
+            codigo += (b & 0x80) == 0 ? '0' : '1';
+            b = (byte) (b << 1);
+            cantBits--;
+
+            if (tabla.containsKey(codigo)) {
+                String palabra = tabla.get(codigo);
+                writer.write(palabra.getBytes());
+                writer.write(' ');
+                codigo = "";
+            }
+        }
+
+        writer.close();
+        reader.close();
+}
+    private static Map<String, String> leerTabla(FileInputStream reader){
+        Map<String, String> tabla = new HashMap<>();
+        int cantSimbolos;
+
+//        try {
+//            cantSimbolos = reader.readNBytes()
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        return null;
+    }
+
+    private static void almacenarTabla(FileOutputStream writer, Map<String, String> tabla){
+
+        int cantSimbolos = Lectura.getInstance().getCantSimbolos();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
+
+        StringBuilder cadenabinaria = new StringBuilder();
+
+        try {
+            writer.write(cantSimbolos);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //printWriter.print(cantSimbolos + "\n");
+
+        for (int i = 0; i < cantSimbolos; i++) {
+            //System.out.println(indice.get(i)+" "+tablaCodificaHuffman.get(indice.get(i))+"\n");
+            //byte[] bval = new BigInteger(cadenabinaria.toString(), 2).toByteArray();
+            byte[] bval = new BigInteger(indice.get(i),2).toByteArray();
+            try {
+                writer.write(bval);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    public static void comprimir(String nombreArchivo, String nombreArchivoSalida, Map<String, String> tabla) throws IOException {
+
+        File archivo = new File(nombreArchivo);
+        Scanner sc = new Scanner(archivo);
+        FileOutputStream writer = new FileOutputStream("salidas/" + nombreArchivoSalida);
+
+        almacenarTabla(writer, tabla);
+
+        byte b = 0;
+        int cantBits = 0;
+        while (sc.hasNextLine()) {
+            Scanner sc2 = new Scanner(sc.nextLine());
+            while (sc2.hasNext()) {
+                String palabra = sc2.next();
+                String codigo = tabla.get(palabra);
+                for (int i = 0; i < codigo.length(); i++) {
+                    b = (byte) (b << 1);
+                    if (codigo.charAt(i) == '1') {
+                        b = (byte) (b | 1);
+                    }
+                    cantBits++;
+                    if (cantBits == 8) {
+                        writer.write(b);
+                        b = 0;
+                        cantBits = 0;
+                    }
+                }
+            }
+            sc2.close();
+        }
+
+        if (cantBits != 0) {
+            b = (byte) (b << (8 - cantBits));
+            writer.write(b);
+        }
+
+        sc.close();
+        writer.close();
+    }
+
+
+    public void creaArchHuffman() {
+
+        FileReader fileReader = null;
+        PrintWriter printWriter = null;
+        int cantSimbolos = 0;
+
+        Map<String, String> tablaCodificaHuffman = Lectura.getInstance().getTablaCodificaHuffman();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
+
+        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("InformationTheoryTP2/InformationTheoryTP2/src/assets/datos.txt");
+        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+
+        Scanner lector = null;
+        try {
+            lector = new Scanner(doc);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String simbolo = "";
+
+        FileWriter archivoSalida;
+        try {
+            //FileWriter archivoSalida= new FileWriter("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
+            //FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
+            archivoSalida = new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
+            printWriter = new PrintWriter(archivoSalida);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        // ESCRIBE EL HEADER
+        cantSimbolos = Lectura.getInstance().getCantSimbolos();
+        printWriter.print(cantSimbolos + "\n");
+        for (int i = 0; i < cantSimbolos; i++) {
+            //System.out.println(indice.get(i)+" "+tablaCodificaHuffman.get(indice.get(i))+"\n");
+            printWriter.print(indice.get(i) + " " + tablaCodificaHuffman.get(indice.get(i)) + "\n");
+            //printWriter.print(tablaCodificaHuffman.get(indice.get(i))+"\n");
+        }
+
+        while (lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
+            simbolo = lector.next();
+            //System.out.println(simbolo+": "+Lectura.getInstance().getTablaCodificaHuffman().get(simbolo)+"\n");
+            printWriter.print(Lectura.getInstance().getTablaCodificaHuffman().get(simbolo));
+        }
+
+        try {
+            archivoSalida.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("archivo creado");
     }
 
 //    public void creaArch(int largoPalabra) {
@@ -179,23 +343,26 @@ public class EscribeArchivos {
         }
     }*/
 
-    public void leeBin() {
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.huf");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        BufferedInputStream entrada = new BufferedInputStream(fis);
-        byte[] bval;
-        String cosa;
-        try {
-           // cosa = Lectura.getInstance().getTablaCodificaHuffman().get();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(cosa);
-    }
+//    public void leeBin() {
+//        FileInputStream fis = null;
+//        try {
+//            fis = new FileInputStream("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.huf");
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//        BufferedInputStream entrada = new BufferedInputStream(fis);
+//        byte[] bval;
+//        String cosa;
+//        try {
+//           // cosa = Lectura.getInstance().getTablaCodificaHuffman().get();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println(cosa);
+//    }
+
+
+
 //    private static void recontruir(String nombrearch, Nodo raiz) throws IOException {
 //        int car;
 //        String simbolo;

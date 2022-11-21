@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 class Nodo {
+    double prob;
     int frec;
     String simbolo;
     Nodo izq;
@@ -21,7 +22,7 @@ class compare implements Comparator<Nodo> {
 public class Huffman {
 
     private static int codigoMasLargo = 0;
-
+    private static Nodo arbol;
     public static void cargaTabla(Nodo raiz, String s) {
 
         if (raiz.izq == null && raiz.der == null ) {
@@ -67,6 +68,7 @@ public class Huffman {
             raiz = temp;
             cola.add(temp);
         }
+        arbol = raiz;
         cargaTabla(raiz, "");
         //System.out.println("Entropia = " +CalculaEntropia(raiz));
     }
@@ -75,16 +77,46 @@ public class Huffman {
         return codigoMasLargo;
     }
 
+    public static void setProbabilidad(){
+        Map <String, Register> diccionario = Lectura.getInstance().getDiccionario();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
+        int n = Lectura.getInstance().getIndice().size();
 
-//    private static double CalculaEntropia(Nodo arbol) { //Sumar todos los nodos hoja * probabilidad
-//        if (arbol == null)
-//            return 0;
-//        else {
-//            if (arbol.izq == null && arbol.der == null)
-//                return (-Math.log(arbol.frec) / Math.log(2)) * arbol.frec;
-//            else
-//                return CalculaEntropia(arbol.izq) + CalculaEntropia(arbol.der);
-//        }
-//    }
+        int frectotal = 0;
+
+        for (int i=0; i<n;i++){
+            frectotal += diccionario.get(indice.get(i)).getFrec();
+        }
+
+        recorreArbol(arbol,frectotal);
+    }
+
+    private static void recorreArbol(Nodo raiz,int frecTotal){
+
+        if(raiz != null){
+            raiz.prob =(double) raiz.frec/frecTotal;
+            recorreArbol(raiz.izq,frecTotal);
+            recorreArbol(raiz.der,frecTotal);
+        }
+    }
+    public static double calculaEntropia(){
+        setProbabilidad();
+        return entropia(arbol);
+    }
+
+    private static double entropia(Nodo raiz) {
+        if (raiz == null)
+            return 0;
+        else {
+            if (raiz.izq == null && raiz.der == null)
+                return (-Math.log(raiz.prob) / Math.log(2)) * raiz.prob;
+            else
+                return entropia(raiz.izq) + entropia(raiz.der);
+        }
+    }
+
+    public static double rendimiento(){
+        return calculaEntropia()/ Calculos.longitudMedia(Lectura.getInstance().getTablaCodificaHuffman());
+    }
 
 }

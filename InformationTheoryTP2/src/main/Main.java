@@ -18,23 +18,23 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        //System.out.println(Lectura.getInstance().getDiccionario());
         Huffman.codificaHuffman();
-        //System.out.println(Lectura.getInstance().tablaCodificaHuffman);
-        //System.out.println(Lectura.getInstance().getTablaHuffman());
-       // EscribeArchivos.getInstance().creaArchHuffman();
+
         //huffman
-        EscribeArchivos.getInstance().creaArch();
-        EscribeArchivos.getInstance().leeBin();
+        EscribeArchivos.getInstance().creaArchHuffman();
+
         //Lectura.getInstance().getTablaCodificaHuffman().clear();
 
-        //System.out.println(Lectura.getInstance().getDiccionario());*/
+        ShannonFano.codificaShannon(0,Lectura.getInstance().getCantSimbolos()-1);
+        calculos.calculaCantInfo();
 
-       // bits b = new bits();
-        //b.leer();
-    calculos.calculaCantInfo();
-        System.out.println(calculos.longitudMedia());
+        System.out.println("LongMedia Huffman: "+calculos.longitudMedia(Lectura.getInstance().getTablaCodificaHuffman()));
+        System.out.println("Rendimiento huffman: "+calculos.rendimiento(Lectura.getInstance().getTablaCodificaHuffman()));
+        System.out.println("Entropia arbol: "+ Huffman.calculaEntropia());
+        System.out.println("Rendimiento huffman"+ Huffman.rendimiento()); // arbol
 
+//        System.out.println("LongMedia Shannon: "+calculos.longitudMedia(Lectura.getInstance().getTablaCodificaShannon()));
+//        System.out.println("Rendimiento Shannon: "+calculos.rendimiento(Lectura.getInstance().getTablaCodificaShannon()));
 
     }
 }

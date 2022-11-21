@@ -9,7 +9,7 @@ public class ShannonFano {
 	public static Map<String, Register> diccionario = Lectura.getInstance().getDiccionario();
 
 	private static int codigoMasLargo = 0;
-	public static void codifica(int inicio, int fin){
+	private static void codifica(int inicio, int fin){
 
 		if(inicio!=fin) {
 			int y=inicio;
