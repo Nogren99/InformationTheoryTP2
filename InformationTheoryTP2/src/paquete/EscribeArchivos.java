@@ -2,6 +2,7 @@ package paquete;
 
 import javax.print.DocFlavor;
 import java.io.*;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -62,17 +63,13 @@ public class EscribeArchivos {
         FileReader fileReader = null;
         int cantSimbolos = 0;
         String ruta_archivo;
-
-        int longSimbolo = Lectura.getInstance().getSimboloMasLargo() - 1;
-        int longCodigo = Huffman.getCodigoMasLargo() - 1;
-
-        //char simboloCad[] = new char [longSimbolo];
-//        char codigoCad[] = new char [longCodigo];
-
-
+        Map<String, String> tablaCodificaHuffman = Lectura.getInstance().getTablaCodificaHuffman();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
         String simbolo = "";
         String codigo = "";
-        //String simbolo[] = new String[longSimbolo];
+
+//        int longSimbolo = Lectura.getInstance().getSimboloMasLargo() - 1;
+//        int longCodigo = Huffman.getCodigoMasLargo() - 1;
 
 
         ruta_archivo = "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
@@ -85,12 +82,9 @@ public class EscribeArchivos {
             throw new RuntimeException(e);
         }
 
-        Map<String, String> tablaCodificaHuffman = Lectura.getInstance().getTablaCodificaHuffman();
-        ArrayList<String> indice = Lectura.getInstance().getIndice();
-
-        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
         //File doc = new File("InformationTheoryTP2/InformationTheoryTP2/src/assets/datos.txt");
-        //File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         Scanner lector = null;
         try {
@@ -109,14 +103,11 @@ public class EscribeArchivos {
         //printWriter.print(cantSimbolos + "\n");
         for (int i = 0; i < cantSimbolos; i++) {
             try {
-
                 simbolo = indice.get(i);
-
                 codigo = tablaCodificaHuffman.get(indice.get(i));
 
                 file.writeObject(simbolo);
                 file.writeObject(codigo);
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -134,6 +125,101 @@ public class EscribeArchivos {
         System.out.println("archivo creado");
     }
 
+    public void creaArch(){
+
+        Map<String, String> tablaCodificaHuffman = Lectura.getInstance().getTablaCodificaHuffman();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
+        int cantSimbolos = Lectura.getInstance().getCantSimbolos();
+
+        String simbolo;
+        StringBuilder cadenabinaria = new StringBuilder();
+//        String nuevocod;
+//        FileReader entrada = null;
+
+        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        Scanner lector = null;
+        try {
+            lector = new Scanner(doc);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        try {
+            FileOutputStream fos = new FileOutputStream("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.huf");
+            BufferedOutputStream salida = new BufferedOutputStream(fos);
+
+            // escribri la tabla
+
+            //------------------
+
+            //entrada = new FileReader("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+            //car = entrada.read();
+            while (lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
+                simbolo = lector.next();
+                System.out.println(simbolo+": "+tablaCodificaHuffman.get(simbolo));
+                cadenabinaria.append(tablaCodificaHuffman.get(simbolo));
+            }
+
+            byte[] bval = new BigInteger(cadenabinaria.toString(), 2).toByteArray();
+            try {
+                salida.write(bval);
+                lector.close();
+                //entrada.close();
+                salida.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("NO SE ENCONTRADO EL ARCHIVO DE ENTRADA Verifique que exista el archivo");
+        }
+    }
+
+    public void leeBin(){
+
+    }
+//    private static void recontruir(String nombrearch, Nodo raiz) throws IOException {
+//        int car;
+//        String simbolo;
+//        StringBuilder cadenabinaria = new StringBuilder();
+//        String nuevocod;
+//        FileReader entrada = null;
+//
+//        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+//        //File doc = new File("InformationTheoryTP2/InformationTheoryTP2/src/assets/datos.txt");
+//        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+//
+//        Scanner lector = null;
+//        try {
+//            lector = new Scanner(doc);
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        try {
+//            FileOutputStream fos = new FileOutputStream(nombrearch.substring(0, nombrearch.length() - 3) + "huf");
+//            BufferedOutputStream salida = new BufferedOutputStream(fos);
+//
+//            entrada = new FileReader(nombrearch);
+//            car = entrada.read();
+//
+//            while (car != -1) {
+//                //nuevocod = Util.buscaArbol(raiz, (char) car);
+//                nuevocod = Lectura.getInstance().getTablaCodificaHuffman().get();
+//                if (nuevocod != null) { //Nunca debería ser null
+//                    cadenabinaria.append(nuevocod);
+//                }
+//                car = entrada.read(); //por la lectura anticipada
+//            }
+//            byte[] bval = new BigInteger(cadenabinaria.toString(), 2).toByteArray();
+//            salida.write(bval);
+//            entrada.close();
+//            salida.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("NO SE ENCONTRADO EL ARCHIVO DE ENTRADA Verifique que exista el archivo");
+//        }
+//    }
 
     public void creaArchShannon() {
 

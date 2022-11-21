@@ -68,7 +68,7 @@ public class Huffman {
             cola.add(temp);
         }
         cargaTabla(raiz, "");
-        System.out.println("Entropia = " +CalculaEntropia(raiz));
+        //System.out.println("Entropia = " +CalculaEntropia(raiz));
     }
 
     public static int getCodigoMasLargo() {
@@ -76,15 +76,15 @@ public class Huffman {
     }
 
 
-    private static double CalculaEntropia(Nodo arbol) { //Sumar todos los nodos hoja * probabilidad
-        if (arbol == null)
-            return 0;
-        else {
-            if (arbol.izq == null && arbol.der == null)
-                return (-Math.log(arbol.frec) / Math.log(2)) * arbol.frec;
-            else
-                return CalculaEntropia(arbol.izq) + CalculaEntropia(arbol.der);
-        }
-    }
+//    private static double CalculaEntropia(Nodo arbol) { //Sumar todos los nodos hoja * probabilidad
+//        if (arbol == null)
+//            return 0;
+//        else {
+//            if (arbol.izq == null && arbol.der == null)
+//                return (-Math.log(arbol.frec) / Math.log(2)) * arbol.frec;
+//            else
+//                return CalculaEntropia(arbol.izq) + CalculaEntropia(arbol.der);
+//        }
+//    }
 
 }

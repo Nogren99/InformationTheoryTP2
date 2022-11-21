@@ -22,7 +22,9 @@ public class Main {
         Huffman.codificaHuffman();
         //System.out.println(Lectura.getInstance().tablaCodificaHuffman);
         //System.out.println(Lectura.getInstance().getTablaHuffman());
-        EscribeArchivos.getInstance().creaArchHuffman();
+       // EscribeArchivos.getInstance().creaArchHuffman();
+        //huffman
+        EscribeArchivos.getInstance().creaArch();
         //Lectura.getInstance().getTablaCodificaHuffman().clear();
 
         //System.out.println(Lectura.getInstance().getDiccionario());*/
