@@ -18,6 +18,7 @@ public class Lectura {
     public Map <String, String> tablaCodificaShannon = new HashMap<String, String>();
     public int cantSimbolos;
     //public int cantCaracteres;
+    public int simboloMasLargo = 0;
 
     public void setCantSimbolos(int cantSimbolos) {
         this.cantSimbolos = cantSimbolos;
@@ -61,6 +62,14 @@ public class Lectura {
         if (instance == null)
             instance = new Lectura();
         return instance;
+    }
+
+    public int getSimboloMasLargo() {
+        return simboloMasLargo;
+    }
+
+    public void setSimboloMasLargo(int simboloMasLargo) {
+        this.simboloMasLargo = simboloMasLargo;
     }
 
     public void setDiccionario(Map<String, Register> diccionario) {
@@ -149,9 +158,9 @@ public class Lectura {
 
     public void leeArch () throws IOException {
 
-        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
         //File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
-       // File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         //File doc = new File("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
         String mensaje="", str,simbolo;
@@ -171,6 +180,10 @@ public class Lectura {
 
         while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
+
+            if(simbolo.length() > this.simboloMasLargo)
+                this.simboloMasLargo = simbolo.length();
+
             //System.out.println(simbolo);
             if(!diccionario.containsKey(simbolo)){
                 indice.add(simbolo);

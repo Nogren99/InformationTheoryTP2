@@ -34,28 +34,28 @@ public class bits {
 
     public void leer()
     {
-        try {
-            String docccc;
-            //Stream para leer archivo
-            ObjectInputStream file = new ObjectInputStream(new FileInputStream( this.ruta_archivo ));
-            //Se lee el objeto de archivo y este debe convertirse al tipo de clase que corresponde
-            docccc = (File) file.readObject();
-            //se cierra archivo
-            file.close();
-
-            Scanner lector = null;
-            lector = new Scanner(docccc);
-            String simbolo="";
-            while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
-                simbolo = lector.next();
-                System.out.println(simbolo);
-            }
-            //Se utilizan metodos de la clase asi como variables guardados en el objeto
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+//        try {
+//            String docccc;
+//            //Stream para leer archivo
+//            ObjectInputStream file = new ObjectInputStream(new FileInputStream( this.ruta_archivo ));
+//            //Se lee el objeto de archivo y este debe convertirse al tipo de clase que corresponde
+//            docccc = (File) file.readObject();
+//            //se cierra archivo
+//            file.close();
+//
+//            Scanner lector = null;
+//            lector = new Scanner(docccc);
+//            String simbolo="";
+//            while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
+//                simbolo = lector.next();
+//                System.out.println(simbolo);
+//            }
+//            //Se utilizan metodos de la clase asi como variables guardados en el objeto
+//        } catch (ClassNotFoundException ex) {
+//            System.out.println(ex);
+//        } catch (IOException ex) {
+//            System.out.println(ex);
+//        }
     }
 
     public void decodifica(){

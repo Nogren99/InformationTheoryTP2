@@ -8,6 +8,7 @@ public class ShannonFano {
 	public static ArrayList<String> indice = Lectura.getInstance().getIndice();
 	public static Map<String, Register> diccionario = Lectura.getInstance().getDiccionario();
 
+	private static int codigoMasLargo = 0;
 	public static void codifica(int inicio, int fin){
 
 		if(inicio!=fin) {
@@ -55,6 +56,9 @@ public class ShannonFano {
 			String simbolo = diccionario.get(indice.get(i)).getSimbolo();
 			String codigo = diccionario.get(indice.get(i)).getCodigo();
 
+			if(codigo.length() > codigoMasLargo)
+				codigoMasLargo = codigo.length();
+
 			tablaShannon.put(simbolo,codigo);
 		}
 	}
@@ -91,4 +95,8 @@ public class ShannonFano {
 //		}
 //
 //	    }
+
+	public static int getCodigoMasLargo() {
+		return codigoMasLargo;
+	}
 }
