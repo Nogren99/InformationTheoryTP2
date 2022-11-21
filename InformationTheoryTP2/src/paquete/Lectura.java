@@ -175,8 +175,6 @@ public class Lectura {
         StringBuilder sb = new StringBuilder();
         Scanner lector = new Scanner(doc);
 
-//            BufferedReader obj = new BufferedReader(new FileReader(doc));
-//            str = obj.readLine();
 
         while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();

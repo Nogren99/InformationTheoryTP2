@@ -11,6 +11,7 @@ public class Main {
 
     public static void main(String [] args){
        //Huffman huffman = new Huffman();
+        Calculos calculos = new Calculos();
         try {
             Lectura.getInstance().leeArch();
         } catch (IOException e) {
@@ -26,8 +27,10 @@ public class Main {
 
         //System.out.println(Lectura.getInstance().getDiccionario());*/
 
-        bits b = new bits();
-        b.leer();
+       // bits b = new bits();
+        //b.leer();
+    calculos.calculaCantInfo();
+        System.out.println(calculos.longitudMedia());
 
 
     }
