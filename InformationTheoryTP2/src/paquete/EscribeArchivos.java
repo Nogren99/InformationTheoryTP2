@@ -61,13 +61,22 @@ public class EscribeArchivos {
         FileReader fileReader = null;
         PrintWriter printWriter = null;
         int cantSimbolos = 0;
+        String ruta_archivo;
+
+        ruta_archivo = "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\archivo.dat";
+        ObjectOutputStream file = null;
+        try {
+            file = new ObjectOutputStream(new FileOutputStream(ruta_archivo));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Map<String, String> tablaCodificaHuffman = Lectura.getInstance().getTablaCodificaHuffman();
         ArrayList<String> indice = Lectura.getInstance().getIndice();
 
-        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
         //File doc = new File("InformationTheoryTP2/InformationTheoryTP2/src/assets/datos.txt");
-        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         Scanner lector = null;
         try {
@@ -78,34 +87,49 @@ public class EscribeArchivos {
         String simbolo = "";
 
         FileWriter archivoSalida;
-        try {
+      /*  try {
             //FileWriter archivoSalida= new FileWriter("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
             //FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
             archivoSalida = new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
             printWriter = new PrintWriter(archivoSalida);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         // ESCRIBE EL HEADER
         cantSimbolos = Lectura.getInstance().getCantSimbolos();
-        printWriter.print(cantSimbolos + "\n");
+        try {
+            file.writeObject(String.valueOf(cantSimbolos));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //printWriter.print(cantSimbolos + "\n");
         for (int i = 0; i < cantSimbolos; i++) {
             //System.out.println(indice.get(i)+" "+tablaCodificaHuffman.get(indice.get(i))+"\n");
-            printWriter.print(indice.get(i) + " " + tablaCodificaHuffman.get(indice.get(i)) + "\n");
+           // printWriter.print(indice.get(i) + " " + tablaCodificaHuffman.get(indice.get(i)) + "\n");
+            try {
+                file.writeObject(indice.get(i) + " " + tablaCodificaHuffman.get(indice.get(i)) + "\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             //printWriter.print(tablaCodificaHuffman.get(indice.get(i))+"\n");
         }
 
         while (lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
             //System.out.println(simbolo+": "+Lectura.getInstance().getTablaCodificaHuffman().get(simbolo)+"\n");
-            printWriter.print(Lectura.getInstance().getTablaCodificaHuffman().get(simbolo));
+            //printWriter.print(Lectura.getInstance().getTablaCodificaHuffman().get(simbolo));
+            try {
+                file.writeObject(Lectura.getInstance().getTablaCodificaHuffman().get(simbolo));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
-        try {
+      /*  try {
             archivoSalida.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
         System.out.println("archivo creado");
     }

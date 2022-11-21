@@ -35,7 +35,7 @@ public class bits {
     public void leer()
     {
         try {
-            File docccc;
+            String docccc;
             //Stream para leer archivo
             ObjectInputStream file = new ObjectInputStream(new FileInputStream( this.ruta_archivo ));
             //Se lee el objeto de archivo y este debe convertirse al tipo de clase que corresponde

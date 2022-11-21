@@ -27,8 +27,8 @@ public class Main {
         //System.out.println(Lectura.getInstance().getDiccionario());*/
 
         bits b = new bits();
-        b.escribir();
-        b.decodifica();
+       // b.escribir();
+       // b.decodifica();
 
         //b.leer();
 
