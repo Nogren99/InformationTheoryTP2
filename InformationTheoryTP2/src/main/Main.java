@@ -25,6 +25,7 @@ public class Main {
        // EscribeArchivos.getInstance().creaArchHuffman();
         //huffman
         EscribeArchivos.getInstance().creaArch();
+        EscribeArchivos.getInstance().leeBin();
         //Lectura.getInstance().getTablaCodificaHuffman().clear();
 
         //System.out.println(Lectura.getInstance().getDiccionario());*/
