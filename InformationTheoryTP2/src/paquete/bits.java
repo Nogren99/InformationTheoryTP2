@@ -15,11 +15,11 @@ public class bits {
         try {
             //File doccc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
 
-            //ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
-            //File doccc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
+            ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
+            File doccc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
 
-            ruta_archivo = "InformationTheoryTP2/src/assets/huffman.dat";
-            File doccc = new File("InformationTheoryTP2/src/assets/huffman.txt");
+//            ruta_archivo = "InformationTheoryTP2/src/assets/huffman.dat";
+//            File doccc = new File("InformationTheoryTP2/src/assets/huffman.txt");
 
             ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(this.ruta_archivo));
             file.writeObject(doccc);
@@ -31,7 +31,6 @@ public class bits {
             throw new RuntimeException(e);
         }
     }
-
 
     public void leer()
     {
@@ -68,13 +67,13 @@ public class bits {
         Map<String, String> tabla = new HashMap<String, String>();  //CODIGO - SIMBOLO
         //Map<String, String> tabla = Lectura.getInstance().getTablaCodificaHuffman();
         FileWriter fw = null;
-        //this.ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
-        this.ruta_archivo = "InformationTheoryTP2/src/assets/huffman.dat";
+        this.ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
+        //this.ruta_archivo = "InformationTheoryTP2/src/assets/huffman.dat";
 
         int i = 0, cantCaracteres = 0;
         try {
-            //fw = new FileWriter(new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\decodificacionHuffman.txt"));
-            fw = new FileWriter(new File("InformationTheoryTP2/src/assets/decodificacionHuffman.txt"));
+            fw = new FileWriter(new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\decodificacionHuffman.txt"));
+            //fw = new FileWriter(new File("InformationTheoryTP2/src/assets/decodificacionHuffman.txt"));
             printWriter=new PrintWriter(fw);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -96,8 +95,8 @@ public class bits {
             //Armo hashmap (codigo - simbolo) leyendo huffman.dat
 
             Scanner lector = new Scanner(docccc);
-            codigoo=lector.next();
-            palabras=parseInt(codigoo);
+            codigoo = lector.next();
+            palabras = parseInt(codigoo);
             //System.out.println("codigoo : "+palabras);
             //palabras++;
             //System.out.println("a ver si suma:"+palabras);

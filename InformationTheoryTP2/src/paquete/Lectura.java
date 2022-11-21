@@ -150,8 +150,8 @@ public class Lectura {
     public void leeArch () throws IOException {
 
         //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
-        File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
-        //File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
+        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         //File doc = new File("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
         String mensaje="", str,simbolo;
@@ -171,7 +171,7 @@ public class Lectura {
 
         while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
-           // System.out.println(simbolo);
+            //System.out.println(simbolo);
             if(!diccionario.containsKey(simbolo)){
                 indice.add(simbolo);
                 diccionario.put(simbolo, new Register(simbolo, 1));

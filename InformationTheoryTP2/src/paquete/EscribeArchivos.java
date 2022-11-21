@@ -57,7 +57,8 @@ public class EscribeArchivos {
 //    }
 
     public void creaArchHuffman() {
-        FileReader fileReader=null;
+
+        FileReader fileReader = null;
         PrintWriter printWriter = null;
         int cantSimbolos = 0;
 
@@ -65,8 +66,8 @@ public class EscribeArchivos {
         ArrayList<String> indice = Lectura.getInstance().getIndice();
 
         //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
-        File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
-        //File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("InformationTheoryTP2/InformationTheoryTP2/src/assets/datos.txt");
+        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         Scanner lector = null;
         try {
@@ -76,35 +77,45 @@ public class EscribeArchivos {
         }
         String simbolo = "";
 
+        FileWriter archivoSalida;
         try {
             //FileWriter archivoSalida= new FileWriter("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
-            FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
-            //FileWriter archivoSalida= new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
-            printWriter= new PrintWriter(archivoSalida);
+            //FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
+            archivoSalida = new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
+            printWriter = new PrintWriter(archivoSalida);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         // ESCRIBE EL HEADER
         cantSimbolos = Lectura.getInstance().getCantSimbolos();
-        printWriter.print(cantSimbolos+"\n");
-        for(int i=0; i < cantSimbolos; i++){
-            printWriter.print(indice.get(i)+" ");
-            printWriter.print(tablaCodificaHuffman.get(indice.get(i))+"\n");
+        printWriter.print(cantSimbolos + "\n");
+        for (int i = 0; i < cantSimbolos; i++) {
+            //System.out.println(indice.get(i)+" "+tablaCodificaHuffman.get(indice.get(i))+"\n");
+            printWriter.print(indice.get(i) + " " + tablaCodificaHuffman.get(indice.get(i)) + "\n");
+            //printWriter.print(tablaCodificaHuffman.get(indice.get(i))+"\n");
         }
 
-        while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
+        while (lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
-            //System.out.println(simbolo+": "+Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
+            //System.out.println(simbolo+": "+Lectura.getInstance().getTablaCodificaHuffman().get(simbolo)+"\n");
             printWriter.print(Lectura.getInstance().getTablaCodificaHuffman().get(simbolo));
         }
-            System.out.println("archivo creado");
+
+        try {
+            archivoSalida.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+        System.out.println("archivo creado");
+    }
 
 
     public void creaArchShannon() {
+
         FileReader fileReader=null;
         PrintWriter printWriter = null;
-
+        FileWriter archivoSalida;
         File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
         Scanner lector = null;
 
@@ -120,7 +131,7 @@ public class EscribeArchivos {
         String simbolo = "";
 
         try {
-            FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/shannon.txt");
+            archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/shannon.txt");
             printWriter= new PrintWriter(archivoSalida);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -138,6 +149,12 @@ public class EscribeArchivos {
             simbolo = lector.next();
             //System.out.println(simbolo+": "+Lectura.getInstance().getTablaHuffman().get(simbolo)+"\n");
             printWriter.print(Lectura.getInstance().getTablaCodificaShannon().get(simbolo)+"\n");
+        }
+
+        try {
+            archivoSalida.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         System.out.println("archivo creado");
     }

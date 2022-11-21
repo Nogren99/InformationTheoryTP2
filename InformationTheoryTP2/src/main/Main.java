@@ -17,15 +17,19 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        //System.out.println(Lectura.getInstance().getDiccionario());
         Huffman.codificaHuffman();
+        //System.out.println(Lectura.getInstance().tablaCodificaHuffman);
         //System.out.println(Lectura.getInstance().getTablaHuffman());
         EscribeArchivos.getInstance().creaArchHuffman();
-        //Lectura.getInstance().getTablaHuffman().clear();
+        //Lectura.getInstance().getTablaCodificaHuffman().clear();
 
         //System.out.println(Lectura.getInstance().getDiccionario());*/
+
         bits b = new bits();
         b.escribir();
         b.decodifica();
+
         //b.leer();
 
 //        ShannonFano.codificaShannon(0,Lectura.getInstance().getCantSimbolos()-1);
