@@ -9,13 +9,13 @@ import static java.lang.Integer.parseInt;
 
 public class bits {
 
-    //private String ruta_archivo = "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\archivo.dat";
-    private String ruta_archivo;
+    private String ruta_archivo = "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
+    //private String ruta_archivo;
     public void escribir() {
         try {
             //File doccc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
 
-            ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
+            //ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
             File doccc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
 
 //            ruta_archivo = "InformationTheoryTP2/src/assets/huffman.dat";
@@ -34,28 +34,51 @@ public class bits {
 
     public void leer()
     {
-//        try {
-//            String docccc;
-//            //Stream para leer archivo
-//            ObjectInputStream file = new ObjectInputStream(new FileInputStream( this.ruta_archivo ));
-//            //Se lee el objeto de archivo y este debe convertirse al tipo de clase que corresponde
-//            docccc = (File) file.readObject();
-//            //se cierra archivo
-//            file.close();
-//
-//            Scanner lector = null;
-//            lector = new Scanner(docccc);
-//            String simbolo="";
-//            while(lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
-//                simbolo = lector.next();
-//                System.out.println(simbolo);
-//            }
-//            //Se utilizan metodos de la clase asi como variables guardados en el objeto
-//        } catch (ClassNotFoundException ex) {
-//            System.out.println(ex);
-//        } catch (IOException ex) {
-//            System.out.println(ex);
-//        }
+        try {
+        String cantCaracteres;
+        //Stream para leer archivo
+        ObjectInputStream file = new ObjectInputStream(new FileInputStream( this.ruta_archivo ));
+
+        char c;
+        String codigo = "";
+        Map<String, String> tabla = new HashMap<String, String>();  //CODIGO - SIMBOLO
+        String codigoo = "";
+        String palabraa="";
+        String dato ="";
+        int palabras, i =0;
+
+        //Se lee el objeto de archivo y este debe convertirse al tipo de clase que corresponde
+        try {
+            cantCaracteres = (String) file.readObject();
+            while (i<parseInt(cantCaracteres)){
+                palabraa = (String)file.readObject();
+                codigoo = (String) file.readObject();
+                tabla.put(codigoo, palabraa);
+                //System.out.println("Palabra "+palabraa);
+                //System.out.println("Codigo "+codigoo);
+                i++;
+            }
+            while ((dato = (String)file.readObject()) != null){
+                System.out.print(tabla.get(dato)+" ");
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        //se cierra archivo
+        try {
+            file.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    } catch (FileNotFoundException e) {
+        throw new RuntimeException(e);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
     }
 
     public void decodifica(){

@@ -26,19 +26,8 @@ public class Main {
 
         //System.out.println(Lectura.getInstance().getDiccionario());*/
 
-        //bits b = new bits();
-       // b.escribir();
-       // b.decodifica();
-
-        //b.leer();
-
-//        ShannonFano.codificaShannon(0,Lectura.getInstance().getCantSimbolos()-1);
-//        System.out.println("Tabla Shannon");
-//        System.out.println(Lectura.getInstance().getTablaShannon());
-//
-//        EscribeArchivos.getInstance().creaArchShannon();
-
-        //Lectura.getInstance().getTablaShannon().clear();
+        bits b = new bits();
+        b.leer();
 
 
     }

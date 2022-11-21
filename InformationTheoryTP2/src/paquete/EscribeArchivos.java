@@ -60,14 +60,13 @@ public class EscribeArchivos {
     public void creaArchHuffman() {
 
         FileReader fileReader = null;
-        PrintWriter printWriter = null;
         int cantSimbolos = 0;
         String ruta_archivo;
 
         int longSimbolo = Lectura.getInstance().getSimboloMasLargo() - 1;
         int longCodigo = Huffman.getCodigoMasLargo() - 1;
 
-        char simboloCad[] = new char [longSimbolo];
+        //char simboloCad[] = new char [longSimbolo];
 //        char codigoCad[] = new char [longCodigo];
 
 
@@ -76,8 +75,8 @@ public class EscribeArchivos {
         //String simbolo[] = new String[longSimbolo];
 
 
-        //ruta_archivo = "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\archivo.dat";
-        ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\archivo.dat";
+        ruta_archivo = "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
+       // ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\archivo.dat";
 
         ObjectOutputStream file = null;
         try {
@@ -89,9 +88,9 @@ public class EscribeArchivos {
         Map<String, String> tablaCodificaHuffman = Lectura.getInstance().getTablaCodificaHuffman();
         ArrayList<String> indice = Lectura.getInstance().getIndice();
 
-        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
         //File doc = new File("InformationTheoryTP2/InformationTheoryTP2/src/assets/datos.txt");
-        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         Scanner lector = null;
         try {
@@ -99,16 +98,6 @@ public class EscribeArchivos {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        FileWriter archivoSalida;
-      /*  try {
-            //FileWriter archivoSalida= new FileWriter("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
-            //FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
-            archivoSalida = new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
-            printWriter = new PrintWriter(archivoSalida);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
 
         // ESCRIBE EL HEADER
         cantSimbolos = Lectura.getInstance().getCantSimbolos();
@@ -119,57 +108,28 @@ public class EscribeArchivos {
         }
         //printWriter.print(cantSimbolos + "\n");
         for (int i = 0; i < cantSimbolos; i++) {
-            //System.out.println(indice.get(i)+" "+tablaCodificaHuffman.get(indice.get(i))+"\n");
-           // printWriter.print(indice.get(i) + " " + tablaCodificaHuffman.get(indice.get(i)) + "\n");
             try {
 
-//                simboloCad = indice.get(i).toCharArray();
-//                simboloCad[longSimbolo] = '\0';
-
-//                codigoCad = tablaCodificaHuffman.get(indice.get(i)).toCharArray();
-//                //codigoCad[longCodigo] = '\n';
-                //System.out.println(simboloCad.length);
-//                file.writeObject(simboloCad);
-//                file.writeObject(codigoCad);
-
                 simbolo = indice.get(i);
-                for(int j = indice.get(i).length(); j <= longSimbolo; j++){
-                        simbolo = simbolo + " ";
-                }
 
                 codigo = tablaCodificaHuffman.get(indice.get(i));
-                for(int j = tablaCodificaHuffman.get(indice.get(i)).length(); j <= longCodigo; j++){
-                    codigo = codigo + " ";
-                }
-                //System.out.println("SimboloLong: "+simbolo.length());
-                file.writeObject(simbolo+codigo);
 
-         //       file.writeObject('\n');
-                //file.writeObject(indice.get(i) + " " + tablaCodificaHuffman.get(indice.get(i)) + "\n");
+                file.writeObject(simbolo);
+                file.writeObject(codigo);
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            //printWriter.print(tablaCodificaHuffman.get(indice.get(i))+"\n");
         }
 
         while (lector.hasNext()) {       // toma las palabras con los signos de puntuacion pegados.
             simbolo = lector.next();
-            //aux = lector.next().toCharArray();
-            //System.out.println(simbolo+": "+Lectura.getInstance().getTablaCodificaHuffman().get(simbolo)+"\n");
-            //printWriter.print(Lectura.getInstance().getTablaCodificaHuffman().get(simbolo));
             try {
                 file.writeObject(Lectura.getInstance().getTablaCodificaHuffman().get(simbolo));
-                //file.writeObject(Lectura.getInstance().getTablaCodificaHuffman().get(aux));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-
-      /*  try {
-            archivoSalida.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
 
         System.out.println("archivo creado");
     }
