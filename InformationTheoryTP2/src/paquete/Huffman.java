@@ -20,10 +20,14 @@ class compare implements Comparator<Nodo> {
 
 public class Huffman {
 
+    private static int codigoMasLargo = 0;
+
     public static void cargaTabla(Nodo raiz, String s) {
 
         if (raiz.izq == null && raiz.der == null ) {
             Lectura.getInstance().getTablaCodificaHuffman().put(raiz.simbolo,s);
+            if(s.length() > codigoMasLargo)
+                codigoMasLargo = s.length();
             return;
         }
         //Cada vez que va a la izquierda agrega un 0 al codigo
@@ -64,4 +68,9 @@ public class Huffman {
         }
         cargaTabla(raiz, "");
     }
+
+    public static int getCodigoMasLargo() {
+        return codigoMasLargo;
+    }
+
 }
