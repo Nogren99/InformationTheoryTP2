@@ -22,7 +22,12 @@ public class Main {
 
         //huffman
         EscribeArchivos.getInstance().creaArchHuffman();
-
+        try {
+            EscribeArchivos.comprimir("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt", "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.huf", Lectura.getInstance().getTablaCodificaHuffman());
+            EscribeArchivos.descomprimir("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.huf", "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\descomprimidoHuffman.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         //Lectura.getInstance().getTablaCodificaHuffman().clear();
 
         ShannonFano.codificaShannon(0,Lectura.getInstance().getCantSimbolos()-1);

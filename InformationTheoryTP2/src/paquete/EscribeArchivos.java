@@ -3,10 +3,7 @@ package paquete;
 import javax.print.DocFlavor;
 import java.io.*;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class EscribeArchivos {
 
@@ -24,10 +21,10 @@ public class EscribeArchivos {
 
     public static void descomprimir(String nombreComprimido, String nombreDescomprimido) throws IOException {
 
-        FileInputStream reader = new FileInputStream("salidas/" + nombreComprimido);
+        FileInputStream reader = new FileInputStream(nombreComprimido);
         Map<String, String> tabla = leerTabla(reader);
 
-        FileOutputStream writer = new FileOutputStream("salidas/" + nombreDescomprimido);
+        FileOutputStream writer = new FileOutputStream(nombreDescomprimido);
 
         byte b = 0;
         int cantBits = 0;
@@ -54,14 +51,25 @@ public class EscribeArchivos {
         reader.close();
 }
     private static Map<String, String> leerTabla(FileInputStream reader){
+        int cantSimbolos = Lectura.getInstance().getCantSimbolos();
         Map<String, String> tabla = new HashMap<>();
-        int cantSimbolos;
+        //int cantSimbolos;
+        byte[] bval = new byte [10];
+        String palabra;
 
-//        try {
-//            cantSimbolos = reader.readNBytes()
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            cantSimbolos = reader.read();
+            //System.out.println("Simbolos "+ cantSimbolos);
+            for (int i=0; i<cantSimbolos; i++){
+                bval =  reader.readNBytes(10);
+                palabra = new String (bval);
+                System.out.println(palabra);
+            }
+
+            //System.out.println("valor: "+bval.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
@@ -77,14 +85,17 @@ public class EscribeArchivos {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //printWriter.print(cantSimbolos + "\n");
 
         for (int i = 0; i < cantSimbolos; i++) {
             //System.out.println(indice.get(i)+" "+tablaCodificaHuffman.get(indice.get(i))+"\n");
             //byte[] bval = new BigInteger(cadenabinaria.toString(), 2).toByteArray();
-            byte[] bval = new BigInteger(indice.get(i),2).toByteArray();
+            //byte[] bval = new BigInteger(indice.get(i).toString(),2).toByteArray();
+            byte[] bval = new byte[10];
+            bval = indice.get(i).getBytes();
+            
             try {
                 writer.write(bval);
+               // System.out.println(Arrays.toString(bval));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -94,7 +105,7 @@ public class EscribeArchivos {
 
         File archivo = new File(nombreArchivo);
         Scanner sc = new Scanner(archivo);
-        FileOutputStream writer = new FileOutputStream("salidas/" + nombreArchivoSalida);
+        FileOutputStream writer = new FileOutputStream(nombreArchivoSalida);
 
         almacenarTabla(writer, tabla);
 
@@ -140,9 +151,9 @@ public class EscribeArchivos {
         Map<String, String> tablaCodificaHuffman = Lectura.getInstance().getTablaCodificaHuffman();
         ArrayList<String> indice = Lectura.getInstance().getIndice();
 
-        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
         //File doc = new File("InformationTheoryTP2/InformationTheoryTP2/src/assets/datos.txt");
-        File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        //File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         Scanner lector = null;
         try {
@@ -154,9 +165,9 @@ public class EscribeArchivos {
 
         FileWriter archivoSalida;
         try {
-            //FileWriter archivoSalida= new FileWriter("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
+            archivoSalida= new FileWriter("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
             //FileWriter archivoSalida= new FileWriter("InformationTheoryTP2/src/assets/huffman.txt");
-            archivoSalida = new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
+            //archivoSalida = new FileWriter("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.txt");
             printWriter = new PrintWriter(archivoSalida);
         } catch (IOException e) {
             throw new RuntimeException(e);
