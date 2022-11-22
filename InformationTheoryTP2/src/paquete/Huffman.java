@@ -37,7 +37,6 @@ public class Huffman {
         cargaTabla(raiz.der, s + "1");
     }
 
-
     public static void codificaHuffman() {
 
         int n = Lectura.getInstance().getCantSimbolos();
@@ -74,7 +73,7 @@ public class Huffman {
     }
 
     public static int getCodigoMasLargo() {
-        return codigoMasLargo;
+        return codigoMasLargo+1;
     }
 
     public static void setProbabilidad(){

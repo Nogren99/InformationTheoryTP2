@@ -17,7 +17,8 @@ public class Lectura {
     public Map <String, String> tablaCodificaHuffman = new HashMap<String, String>();
     public Map <String, String> tablaCodificaShannon = new HashMap<String, String>();
     public int cantSimbolos;
-    //public int cantCaracteres;
+
+    public int cantCaracteres;
     public int simboloMasLargo = 0;
 
     public void setCantSimbolos(int cantSimbolos) {
@@ -30,6 +31,11 @@ public class Lectura {
 
     public Lectura() {
     }
+
+    public int getCantCaracteres() {
+        return cantCaracteres;
+    }
+
     public int getCantSimbolos() {
         return cantSimbolos;
     }
@@ -65,7 +71,7 @@ public class Lectura {
     }
 
     public int getSimboloMasLargo() {
-        return simboloMasLargo;
+        return simboloMasLargo+1;
     }
 
     public void setSimboloMasLargo(int simboloMasLargo) {
@@ -158,14 +164,15 @@ public class Lectura {
 
     public void leeArch () throws IOException {
 
-        File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
-        //File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
+        //File doc = new File("C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
+        File doc = new File("InformationTheoryTP2/src/assets/datos.txt");
         //File doc = new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\datos.txt");
 
         //File doc = new File("E:\\Programas\\Github\\InformationTheory\\InformationTheoryTP1\\src\\assets\\datos.txt");
         String mensaje="", str,simbolo;
         int frec = 0;
         int j=0;
+        int cantCaracteres=0;
         Register actual;
         this.indice.clear();
         this.diccionario.clear();
@@ -181,7 +188,7 @@ public class Lectura {
 
             if(simbolo.length() > this.simboloMasLargo)
                 this.simboloMasLargo = simbolo.length();
-
+            cantCaracteres+=simbolo.length();
             //System.out.println(simbolo);
             if(!diccionario.containsKey(simbolo)){
                 indice.add(simbolo);

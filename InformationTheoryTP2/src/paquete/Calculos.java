@@ -66,4 +66,29 @@ public class Calculos {
         return this.entropia/longitudMedia(tabla);
     }
 
+    public double redundancia(Map <String, String> tabla){
+        return 1- rendimiento(tabla);
+    }
+    public int tamanoTablaHuffman(){
+        Map <String, String> tabla = Lectura.getInstance().getTablaCodificaHuffman();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
+        int tamanoCodigos=0;
+
+        for(int i = 0; i < tabla.size(); i++){
+            tamanoCodigos += tabla.get(indice.get(i)).length();
+        }
+        return Lectura.getInstance().getCantCaracteres()+tamanoCodigos;
+    }
+
+    public int tamanoTablaShannon(){
+
+        Map <String, String> tabla = Lectura.getInstance().getTablaCodificaShannon();
+        ArrayList<String> indice = Lectura.getInstance().getIndice();
+        int tamanoCodigos=0;
+
+        for(int i = 0; i < tabla.size(); i++){
+            tamanoCodigos += tabla.get(indice.get(i)).length();
+        }
+        return Lectura.getInstance().getCantCaracteres()+tamanoCodigos;
+    }
 }
