@@ -3,18 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="4f900b6a-1d85-49df-8109-04390429915d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/huffman.huf" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/huffman.huf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/archivo.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/descomprimidoHuffman.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/shannon.txt" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/assets/shannon.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/Calculos.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/Calculos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/EscribeArchivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/EscribeArchivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/Huffman.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/Huffman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/Lectura.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/Lectura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/ShannonFano.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/ShannonFano.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/bits.java" beforeDir="false" afterPath="$PROJECT_DIR$/InformationTheoryTP2/src/paquete/bits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/archivo.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/descomprimidoHuffman.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/huffman.huf" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/huffman.huf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/shannon.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/assets/shannon.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Calculos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Calculos.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/EscribeArchivos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/EscribeArchivos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Huffman.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Huffman.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Lectura.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/Lectura.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/ShannonFano.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InformationTheoryTP2/paquete/ShannonFano.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

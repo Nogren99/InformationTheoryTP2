@@ -9,7 +9,7 @@ import static java.lang.Integer.parseInt;
 
 public class bits {
 
-    private String ruta_archivo = "C:\\Users\\ACER\\repoTaller\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
+    private static String ruta_archivo;
     //private String ruta_archivo;
     public void escribir() {
         try {
@@ -81,7 +81,7 @@ public class bits {
     }
     }
 
-    public void decodifica(){
+    public static void decodificaHuffman(){
 
         FileReader fr = null;
         PrintWriter printWriter = null;
@@ -90,23 +90,21 @@ public class bits {
         Map<String, String> tabla = new HashMap<String, String>();  //CODIGO - SIMBOLO
         //Map<String, String> tabla = Lectura.getInstance().getTablaCodificaHuffman();
         FileWriter fw = null;
-        this.ruta_archivo = "C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\huffman.dat";
-        //this.ruta_archivo = "InformationTheoryTP2/src/assets/huffman.dat";
+        ruta_archivo = "InformationTheoryTP2/src/assets/huffman.txt";
 
         int i = 0, cantCaracteres = 0;
         try {
-            fw = new FileWriter(new File("C:\\Users\\marti\\OneDrive\\Documentos\\GitHub\\InformationTheoryTP2\\InformationTheoryTP2\\src\\assets\\decodificacionHuffman.txt"));
-            //fw = new FileWriter(new File("InformationTheoryTP2/src/assets/decodificacionHuffman.txt"));
+            fw = new FileWriter(new File("InformationTheoryTP2/src/assets/decodificacionHuffman.txt"));
+
             printWriter=new PrintWriter(fw);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
         try {
             File docccc;
             //Stream para leer archivo
-            ObjectInputStream file = new ObjectInputStream(new FileInputStream( this.ruta_archivo ));
+            ObjectInputStream file = new ObjectInputStream(new FileInputStream( ruta_archivo ));
             //Se lee el objeto de archivo y este debe convertirse al tipo de clase que corresponde
             docccc = (File) file.readObject();
             //se cierra archivo
@@ -115,7 +113,7 @@ public class bits {
             int palabras;
 
 
-            //Armo hashmap (codigo - simbolo) leyendo huffman.dat
+            //Armo hashmap (codigo - simbolo)
 
             Scanner lector = new Scanner(docccc);
             codigoo = lector.next();
@@ -137,37 +135,6 @@ public class bits {
 
                 i++;
             }
-
-
-
-
-            /*
-
-            ----Prueba de charAt---
-
-
-            c=codigazo.charAt(0);
-            System.out.println("c:"+c);
-            c=codigazo.charAt(1);
-            System.out.println("c:"+c);
-            c=codigazo.charAt(2);
-            System.out.println("c:"+c);
-            c=codigazo.charAt(3);
-            System.out.println("c:"+c);
-            System.out.println("a ver el fina");
-            System.out.println(codigazo.charAt(codigazo.length()-11));
-            System.out.println(codigazo.charAt(codigazo.length()-10));
-            System.out.println(codigazo.charAt(codigazo.length()-9));
-            System.out.println(codigazo.charAt(codigazo.length()-8));
-            System.out.println(codigazo.charAt(codigazo.length()-7));
-            System.out.println(codigazo.charAt(codigazo.length()-6));
-            System.out.println(codigazo.charAt(codigazo.length()-5));
-            System.out.println(codigazo.charAt(codigazo.length()-4));
-            System.out.println(codigazo.charAt(codigazo.length()-3));
-            System.out.println(codigazo.charAt(codigazo.length()-2));
-            System.out.println("este es el ultimo caracter"+codigazo.charAt(codigazo.length()-1));
-            //System.out.println("sd"+codigazo.charAt(codigazo.length()));
-            */
 
             String codigazo=lector.next();
             int aux=codigazo.length()-1;
