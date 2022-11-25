@@ -17,6 +17,99 @@ public class EscribeArchivos {
         return instance;
     }
 
+    public static void descomprimir(String nombreComprimido, String nombreDescomprimido) throws IOException {
+
+        FileInputStream reader = new FileInputStream(nombreComprimido);
+        Map<String, String> tabla = leerTabla(reader);
+
+        FileOutputStream writer = new FileOutputStream(nombreDescomprimido);
+
+        byte b = 0;
+        int cantBits = 0;
+        String codigo = "";
+        while (reader.available() > 0) {
+            if (cantBits == 0) {
+                cantBits = 8;
+                b = reader.readNBytes(1)[0];
+            }
+
+            codigo += (b & 0x80) == 0 ? '0' : '1';
+            b = (byte) (b << 1);
+            cantBits--;
+
+            if (tabla.containsKey(codigo)) {
+                String palabra = tabla.get(codigo);
+                writer.write(palabra.getBytes());
+                writer.write(' ');
+                codigo = "";
+            }
+        }
+
+        writer.close();
+        reader.close();
+    }
+    private static Map<String, String> leerTabla(FileInputStream reader){
+        //int cantSimbolos = Lectura.getInstance().getCantSimbolos();
+        Map<String, String> tabla = new HashMap<>();
+        String n;
+        int cantSimbolos;
+        //byte[] bval = new byte [Lectura.getInstance().simboloMasLargo];
+        byte[] bCodigo = new byte[Huffman.getCodigoMasLargo()];
+        byte[] bSimbolo = new byte[Lectura.getInstance().simboloMasLargo];
+        String simbolo,codigo,aux;
+        StringBuilder stB1 = new StringBuilder();
+        StringBuilder stB2 = new StringBuilder();
+
+        try {
+            //cantSimbolos = reader.readNBytes(4);
+//            bval = reader.readNBytes(4);
+//            n = new String(bval);
+//            cantSimbolos = Integer.valueOf(n);
+
+            for (int i=0; i<176; i++){
+                bSimbolo = reader.readNBytes(Lectura.getInstance().simboloMasLargo);
+                bCodigo = reader.readNBytes(Huffman.getCodigoMasLargo());
+                simbolo = new String(bSimbolo);
+                if(simbolo.length() != Lectura.getInstance().simboloMasLargo)
+                    reader.readNBytes(1);
+                codigo = new String(bCodigo);
+                if(!Character.isDigit(codigo.charAt(0)))
+
+                //System.out.println("simbolo: "+simbolo);
+//                int j = 0;
+//                while (j < simbolo.length() && Character.isLetterOrDigit(simbolo.charAt(j))){
+//                //while (j < simbolo.length() && Character.isAlphabetic(simbolo.charAt(j))){
+//                //while (j < simbolo.length() && simbolo.charAt(j) != ' '){
+//                    stB1.append(String.valueOf(simbolo.charAt(j)));
+//                    j++;
+//                }
+//                simbolo = stB1.toString();
+//                j = 0;
+//
+//                while (j < codigo.length() && Character.isLetterOrDigit(codigo.charAt(j))){
+//                //while (j < codigo.length() && Character.isAlphabetic(codigo.charAt(j))){
+//                //while (j < codigo.length() && codigo.charAt(j) != ' '){
+//                    stB2.append(String.valueOf(codigo.charAt(j)));
+//                    j++;
+//                }
+//                codigo = stB2.toString();
+
+                //int j = 0;
+                //while(j < Lectura.getInstance().simboloMasLargo )
+                //bval =  reader.readNBytes(Lectura.getInstance().simboloMasLargo);
+                //palabra = new String (bval);
+               // tabla.put(codigo,simbolo);
+                System.out.println("simbolo: "+simbolo+ "\tcodigo: "+codigo);
+            }
+
+            //System.out.println("valor: "+bval.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //System.out.println(tabla);
+        return tabla;
+    }
+
 
     private static void escribeTabla(FileOutputStream writer, Map<String, String> tabla){
 
@@ -24,41 +117,54 @@ public class EscribeArchivos {
         ArrayList<String> indice = Lectura.getInstance().getIndice();
         String simbolo,codigo;
 
-        try {
-            writer.write(cantSimbolos);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            writer.write(cantSimbolos);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
         for (int i = 0; i < cantSimbolos; i++) {
 
-            byte[] bSimbolo = new byte[Lectura.getInstance().simboloMasLargo];
+          //  byte[] bSimbolo = new byte[Lectura.getInstance().simboloMasLargo];
+            byte[] bSimbolo;
             char cad[] = new char[Lectura.getInstance().simboloMasLargo];
             for(int j = 0; j < indice.get(i).length(); j++){
-                cad[j] = indice.get(i).charAt(j);
+                    cad[j] = indice.get(i).charAt(j);
             }
+//            for(int j = 0; j < Lectura.getInstance().simboloMasLargo; j++){
+//                if(j < indice.get(i).length())
+//                    cad[j] = indice.get(i).charAt(j);
+//                else
+//                    cad[j] = ' ';
+//            }
 
             simbolo = String.copyValueOf(cad);
             bSimbolo = simbolo.getBytes();
-
             byte[] bCodigo = new byte[Huffman.getCodigoMasLargo()];
             char cod[] = new char[Huffman.getCodigoMasLargo()];
 
             for(int j = 0; j < tabla.get(indice.get(i)).length() ; j++){
                 cod[j] = tabla.get(indice.get(i)).charAt(j);
             }
+//            for(int j = 0; j < Huffman.getCodigoMasLargo() ; j++){
+//                if(j < tabla.get(indice.get(i)).length())
+//                    cod[j] = tabla.get(indice.get(i)).charAt(j);
+//                else
+//                    cod[j] = ' ';
+//            }
             codigo = String.copyValueOf(cod);
             bCodigo = codigo.getBytes();
 
+            //System.out.println("simbolo: "+simbolo+ "\tcodigo: "+codigo);
             try {
                 writer.write(bSimbolo);
                 writer.write(bCodigo);
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
     }
+
     public static void creaArch(String nombreArchivo, String nombreArchivoSalida, Map<String, String> tabla) throws IOException {
 
         File archivo = new File(nombreArchivo);
