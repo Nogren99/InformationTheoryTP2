@@ -18,6 +18,7 @@ public class EscribeArchivos {
         return instance;
     }
 
+    //----------------------------------------COMPRIME----------------------------
     public static void comprimir(String nombreArchivo, String nombreArchivoSalida, Map<String, String> tabla) throws IOException {
 
         File archivo = new File(nombreArchivo);
@@ -68,36 +69,35 @@ public class EscribeArchivos {
 
     private static void escribeBin(DataOutputStream writer, String codigo) throws IOException {
 
-        boolean vector[] = new boolean[8];  
-        int i = 0;
-        int carActual = 0;
-        byte byteAEscribir = 0;
-        while (carActual < codigo.length()) {
-            vector[i] = codigo.charAt(carActual) == '1';
-            i++;
-            if (i == 8) {
-                for (int j = 0; j < i; j++) {
-                    byteAEscribir = (byte) (byteAEscribir << 1);
+        int posCod = 0;
+        boolean vector[] = new boolean[8];
+        int posVec = 0;
+        byte b = 0;
+        while (posCod < codigo.length()) {
+            vector[posVec] = codigo.charAt(posCod) == '1';
+            posVec++;
+            if (posVec == 8) {
+                for (int j = 0; j < posVec; j++) {
+                    b = (byte) (b << 1);
                     if (vector[j]) {
-                        byteAEscribir = (byte) (byteAEscribir | 1);
+                        b = (byte) (b | 1);
                     }
                 }
-                writer.writeByte(byteAEscribir);
+                writer.writeByte(b);
                 writer.flush();
-                byteAEscribir = 0;
-                i = 0;
+                b = 0;
+                posVec = 0;
             }
-            carActual++;
+            posCod++;
         }
-        if (i != 8 && i != 0) {
-            for (int j = 0; j < i; j++) {
-                byteAEscribir = (byte) (byteAEscribir << 1);
-                if (vector[j]) {
-                    byteAEscribir = (byte) (byteAEscribir | 1);
-                }
+        if (posVec != 8 && posVec != 0) {
+            for (int i = 0; i < posVec; i++) {
+                b = (byte) (b << 1);
+                if (vector[i])
+                    b = (byte) (b | 1);
             }
-            byteAEscribir = (byte) (byteAEscribir << (8 - i));
-            writer.writeByte(byteAEscribir);
+            b = (byte) (b << (8 - posVec));
+            writer.writeByte(b);
             writer.flush();
         }
     }
