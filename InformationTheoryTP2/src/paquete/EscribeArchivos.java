@@ -68,7 +68,7 @@ public class EscribeArchivos {
 
     private static void escribeBin(DataOutputStream writer, String codigo) throws IOException {
 
-        boolean vector[] = new boolean[8];  // 1 byte que se escribe en el archivo
+        boolean vector[] = new boolean[8];  
         int i = 0;
         int carActual = 0;
         byte byteAEscribir = 0;
@@ -102,8 +102,6 @@ public class EscribeArchivos {
         }
     }
 //----------------------------------------DESCOMPRIME----------------------------
-
-
     private static Map<String, String> leeTabla(DataInputStream reader) throws IOException {
 
         int cantSimbolos = reader.readInt();
