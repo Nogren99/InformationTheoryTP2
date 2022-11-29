@@ -19,9 +19,9 @@ public class Main {
         }
 //---------------------------------------------HUFFMAN--------------------------------------------------
         Huffman.codificaHuffman();
-        //bits.decodificaHuffman();
+
         try {
-            EscribeArchivos.creaArch("InformationTheoryTP2/src/assets/datos.txt", "InformationTheoryTP2/src/assets/huffman.huf", Lectura.getInstance().getTablaCodificaHuffman());
+            EscribeArchivos.comprimir("InformationTheoryTP2/src/assets/datos.txt", "InformationTheoryTP2/src/assets/huffman.huf", Lectura.getInstance().getTablaCodificaHuffman());
             EscribeArchivos.descomprimir("InformationTheoryTP2/src/assets/huffman.huf", "InformationTheoryTP2/src/assets/descomprimidoHuffman.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -31,7 +31,8 @@ public class Main {
         ShannonFano.codificaShannon(0,Lectura.getInstance().getCantSimbolos()-1);
 
         try {
-            EscribeArchivos.creaArch("InformationTheoryTP2/src/assets/datos.txt", "InformationTheoryTP2/src/assets/shannon.fan", Lectura.getInstance().getTablaCodificaShannon());
+            EscribeArchivos.comprimir("InformationTheoryTP2/src/assets/datos.txt", "InformationTheoryTP2/src/assets/shannon.fan", Lectura.getInstance().getTablaCodificaShannon());
+            EscribeArchivos.descomprimir("InformationTheoryTP2/src/assets/shannon.fan","InformationTheoryTP2/src/assets/descomprimidoShannon.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
