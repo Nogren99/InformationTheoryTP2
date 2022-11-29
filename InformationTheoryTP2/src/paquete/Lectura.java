@@ -18,7 +18,7 @@ public class Lectura {
     public Map <String, String> tablaCodificaShannon = new HashMap<String, String>();
     public int cantSimbolos;
 
-    public int cantCaracteres;
+    public int cantCaracteres = 0;
     public int simboloMasLargo = 0;
 
     public void setCantSimbolos(int cantSimbolos) {
@@ -119,7 +119,6 @@ public class Lectura {
         String mensaje="", str,simbolo;
         int frec = 0;
         int j=0;
-        int cantCaracteres=0;
         Register actual;
         this.indice.clear();
         this.diccionario.clear();
@@ -135,7 +134,7 @@ public class Lectura {
 
             if(simbolo.length() > this.simboloMasLargo)
                 this.simboloMasLargo = simbolo.length();
-            cantCaracteres+=simbolo.length();
+            this.cantCaracteres+=simbolo.length();
             if(!diccionario.containsKey(simbolo)){
                 indice.add(simbolo);
                 diccionario.put(simbolo, new Register(simbolo, 1));
